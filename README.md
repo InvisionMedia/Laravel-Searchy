@@ -10,16 +10,16 @@ It requires no other software installed on your server (so can be a little slowe
 
 Looking for Laravel 4 compatible Searchy? Checkout the 1.0 branch :)
 
-https://github.com/TomLingham/Laravel-Searchy/tree/1.0
+https://github.com/InvisionMedia/Laravel-Searchy/tree/1.0
 
 ## Installation
 
-Add `"tom-lingham/searchy" : "2.*"` to your composer.json file under `require`:
+Add `"invision-media/searchy" : "2.*"` to your composer.json file under `require`:
 
 ```json
 "require": {
   "laravel/framework": "5.*",
-  "tom-lingham/searchy" : "2.*"
+  "invision-media/searchy" : "2.*"
 }
 ```
 
@@ -59,6 +59,13 @@ These examples both return an array of Objects containing your search results. Y
 
 ```php
 $users = Searchy::search('users')->fields('name', 'email')->query('John Smith')
+    ->getQuery()->having('relevance', '>', 20)->get();
+```
+
+### Changing your connection?
+Set it using the `->connection()` method.
+```php
+$users = Searchy::search('users')->connection('name_of_connection')->fields('name', 'email')->query('John Smith')
     ->getQuery()->having('relevance', '>', 20)->get();
 ```
 
