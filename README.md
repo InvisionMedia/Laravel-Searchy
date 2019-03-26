@@ -1,4 +1,4 @@
-## Laravel 5+ Searchy
+## Laravel 5+ Searchy - Forked by InvisionMedia to add support for switching from default database connections
 
 ### Database Searching Made Easy
 
