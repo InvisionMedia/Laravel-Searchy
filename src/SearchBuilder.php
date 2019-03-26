@@ -15,117 +15,135 @@ class SearchBuilder
 	 */
 	private $connection;
 
-    /**
-     * @var
-     */
-    private $table;
+	/**
+	 * @var
+	 */
+	private $pdo;
 
-    /**
-     * @var
-     */
-    private $searchFields;
+	/**
+	 * @var
+	 */
+	private $table;
 
-    /**
-     * @var
-     */
-    private $driverName;
+	/**
+	 * @var
+	 */
+	private $searchFields;
 
-    /**
-     * @var
-     */
-    private $config;
+	/**
+	 * @var
+	 */
+	private $driverName;
 
-    public function __construct(Repository $config)
-    {
-        $this->config = $config;
-    }
+	/**
+	 * @var
+	 */
+	private $config;
 
-    /**
-     * @param $searchable
-     *
-     * @return $this
-     */
-    public function search($searchable)
-    {
-        // Check if table name or Eloquent
-        $isEloquent = is_object($searchable) && method_exists($searchable, 'getTable');
+	public function __construct(Repository $config)
+	{
+		$this->config = $config;
+	}
 
-        $this->table = $isEloquent ? $searchable->getTable() : $searchable;
+	/**
+	 * @param $searchable
+	 *
+	 * @return $this
+	 */
+	public function search($searchable)
+	{
+		// Check if table name or Eloquent
+		$isEloquent = is_object($searchable) && method_exists($searchable, 'getTable');
 
-        return $this;
-    }
+		$this->table = $isEloquent ? $searchable->getTable() : $searchable;
 
-    /**
-     * @return FuzzySearchDriver
-     */
-    public function fields(/* $fields */)
-    {
-        $args = func_get_args();
+		return $this;
+	}
 
-        $this->searchFields = is_array( $args[0] ) ? $args[0] : $args;
+	/**
+	 * @return FuzzySearchDriver
+	 */
+	public function fields(/* $fields */)
+	{
+		$args = func_get_args();
 
-        return $this->makeDriver();
-    }
+		$this->searchFields = is_array( $args[0] ) ? $args[0] : $args;
 
-    /**
-     * @param $driverName
-     *
-     * @return $this
-     */
-    public function driver($driverName)
-    {
-        $this->driverName = $driverName;
+		return $this->makeDriver();
+	}
 
-        return $this;
-    }
+	/**
+	 * @param $driverName
+	 *
+	 * @return $this
+	 */
+	public function driver($driverName)
+	{
+		$this->driverName = $driverName;
 
-    /**
-     * @param $connectionName
-     *
-     * @return $this
-     */
-    public function connection($connectionName = null)
-    {
-        $this->connection = $connectionName;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * @param $connectionName
+	 *
+	 * @return $this
+	 */
+	public function connection($connectionName = null)
+	{
+		$this->connection = $connectionName;
 
-    /**
-     * @param $table
-     * @param $searchFields
-     *
-     * @return mixed
-     */
-    public function __call($table, $searchFields)
-    {
-        return call_user_func_array([$this->search($table), 'fields'], $searchFields);
-    }
+		return $this;
+	}
 
-    /**
-     * @return mixed
-     */
-    private function makeDriver()
-    {
-        $relevanceFieldName = $this->config->get('searchy.fieldName');
+	/**
+	 * @param $pdo
+	 *
+	 * @return $this
+	 */
+	public function pdo($pdo = null)
+	{
+		$this->pdo = $pdo;
 
-        // Check if default driver is being overridden, otherwise
-        // load the default
-        $driverName = $this->driverName ? $this->driverName : $this->config->get('searchy.default');
+		return $this;
+	}
 
-        // Gets the details for the selected driver from the configuration file
-        $driver = $this->config->get("searchy.drivers.$driverName")['class'];
+	/**
+	 * @param $table
+	 * @param $searchFields
+	 *
+	 * @return mixed
+	 */
+	public function __call($table, $searchFields)
+	{
+		return call_user_func_array([$this->search($table), 'fields'], $searchFields);
+	}
 
-        // Create a new instance of the selected drivers 'class' and pass
-        // through table and fields to search
-        $driverInstance = new $driver(
-        	$this->connection,
-        	$this->table,
-            $this->searchFields,
-            $relevanceFieldName,
-            ['*']
-        );
+	/**
+	 * @return mixed
+	 */
+	private function makeDriver()
+	{
+		$relevanceFieldName = $this->config->get('searchy.fieldName');
 
-        return $driverInstance;
-    }
+		// Check if default driver is being overridden, otherwise
+		// load the default
+		$driverName = $this->driverName ? $this->driverName : $this->config->get('searchy.default');
+
+		// Gets the details for the selected driver from the configuration file
+		$driver = $this->config->get("searchy.drivers.$driverName")['class'];
+
+		// Create a new instance of the selected drivers 'class' and pass
+		// through table and fields to search
+		$driverInstance = new $driver(
+			$this->connection,
+			$this->pdo,
+			$this->table,
+			$this->searchFields,
+			$relevanceFieldName,
+			['*']
+		);
+
+		return $driverInstance;
+	}
 }
