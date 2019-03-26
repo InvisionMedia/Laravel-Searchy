@@ -1,5 +1,5 @@
 {
-    "name": "tom-lingham/searchy",
+    "name": "InvisionMedia/searchy",
     "description": "Laravel Searchy makes user driven searching easy with fuzzy search, basic string matching, Levenshtein Distance and more.",
     "keywords": ["laravel","search","fuzzy"],
     "license": "MIT",
@@ -7,6 +7,10 @@
         {
             "name": "Tom Lingham",
             "email": "tjlingham@gmail.com"
+        },
+        {
+            "name": "Jonathan Bird",
+            "email": "jonathan@digitalbird.com.au"
         }
     ],
     "require": {
@@ -19,12 +23,12 @@
     },
     "autoload": {
         "psr-4": {
-            "TomLingham\\Searchy\\": "src/"
+            "InvisionMedia\\Searchy\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "TomLingham\\Tests\\Searchy\\": "tests/"
+            "InvisionMedia\\Tests\\Searchy\\": "tests/"
         }
     },
     "config": {
@@ -36,10 +40,10 @@
         },
         "laravel": {
             "providers": [
-                "TomLingham\\Searchy\\SearchyServiceProvider"
+                "InvisionMedia\\Searchy\\SearchyServiceProvider"
             ],
             "aliases": {
-                "Searchy": "TomLingham\\Searchy\\Facades\\Searchy"
+                "Searchy": "InvisionMedia\\Searchy\\Facades\\Searchy"
             }
         }
     },

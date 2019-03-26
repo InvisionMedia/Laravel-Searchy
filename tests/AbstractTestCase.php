@@ -1,9 +1,9 @@
 <?php
 
-namespace TomLingham\Tests\Searchy;
+namespace InvisionMedia\Tests\Searchy;
 
 use GrahamCampbell\TestBench\AbstractPackageTestCase;
-use TomLingham\Searchy\SearchyServiceProvider;
+use InvisionMedia\Searchy\SearchyServiceProvider;
 
 /**
  * This is the abstract test case class.

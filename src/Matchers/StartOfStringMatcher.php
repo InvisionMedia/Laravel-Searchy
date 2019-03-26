@@ -1,6 +1,6 @@
 <?php
 
-namespace TomLingham\Searchy\Matchers;
+namespace InvisionMedia\Searchy\Matchers;
 
 /**
  * Matches Strings that begin with the search string.

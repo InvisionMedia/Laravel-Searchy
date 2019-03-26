@@ -28,13 +28,13 @@ Run `composer update` in your terminal to pull down the package into your vendor
 Add the service provider to the `providers` array in Laravel's `./config/app.php` file:
 
 ```php
-TomLingham\Searchy\SearchyServiceProvider::class
+InvisionMedia\Searchy\SearchyServiceProvider::class
 ```
 
 Add the Alias to the `aliases` array in Laravel's `./config/app.php` file if you want to have quick access to it in your application:
 
 ```php
-'Searchy' => TomLingham\Searchy\Facades\Searchy::class
+'Searchy' => InvisionMedia\Searchy\Facades\Searchy::class
 ```
 
 ## Usage
@@ -171,9 +171,9 @@ The Simple search driver only uses 3 matchers each with the relevant multipliers
 
 ```php
 protected $matchers = [
-  'TomLingham\Searchy\Matchers\ExactMatcher'                 => 100,
-  'TomLingham\Searchy\Matchers\StartOfStringMatcher'         => 50,
-  'TomLingham\Searchy\Matchers\InStringMatcher'              => 30,
+  'InvisionMedia\Searchy\Matchers\ExactMatcher'                 => 100,
+  'InvisionMedia\Searchy\Matchers\StartOfStringMatcher'         => 50,
+  'InvisionMedia\Searchy\Matchers\InStringMatcher'              => 30,
 ];
 ```
 
@@ -183,14 +183,14 @@ The Fuzzy Search Driver is simply another group of matchers setup as follows. Th
 
 ```php
 protected $matchers = [
-  'TomLingham\Searchy\Matchers\ExactMatcher'                 => 100,
-  'TomLingham\Searchy\Matchers\StartOfStringMatcher'         => 50,
-  'TomLingham\Searchy\Matchers\AcronymMatcher'               => 42,
-  'TomLingham\Searchy\Matchers\ConsecutiveCharactersMatcher' => 40,
-  'TomLingham\Searchy\Matchers\StartOfWordsMatcher'          => 35,
-  'TomLingham\Searchy\Matchers\StudlyCaseMatcher'            => 32,
-  'TomLingham\Searchy\Matchers\InStringMatcher'              => 30,
-  'TomLingham\Searchy\Matchers\TimesInStringMatcher'         => 8,
+  'InvisionMedia\Searchy\Matchers\ExactMatcher'                 => 100,
+  'InvisionMedia\Searchy\Matchers\StartOfStringMatcher'         => 50,
+  'InvisionMedia\Searchy\Matchers\AcronymMatcher'               => 42,
+  'InvisionMedia\Searchy\Matchers\ConsecutiveCharactersMatcher' => 40,
+  'InvisionMedia\Searchy\Matchers\StartOfWordsMatcher'          => 35,
+  'InvisionMedia\Searchy\Matchers\StudlyCaseMatcher'            => 32,
+  'InvisionMedia\Searchy\Matchers\InStringMatcher'              => 30,
+  'InvisionMedia\Searchy\Matchers\TimesInStringMatcher'         => 8,
 ];
 ```
 
@@ -200,7 +200,7 @@ The Levenshtein Search Driver uses the Levenshetein Distance to calculate the 'd
 
 ```php
 protected $matchers = [
-  'TomLingham\Searchy\Matchers\LevenshteinMatcher' => 100
+  'InvisionMedia\Searchy\Matchers\LevenshteinMatcher' => 100
 ];
 ```
 
@@ -257,11 +257,11 @@ See *Levenshtein Driver*
 
 ### Drivers
 
-It's really easy to roll your own search drivers. Simply create a class that extends `TomLingham\Searchy\SearchDrivers\BaseSearchDriver` and add a property called `$matchers` with an array of matcher classes as the key and the multiplier for each matcher as the values. You can pick from the classes that are already included with Searchy or you can create your own.
+It's really easy to roll your own search drivers. Simply create a class that extends `InvisionMedia\Searchy\SearchDrivers\BaseSearchDriver` and add a property called `$matchers` with an array of matcher classes as the key and the multiplier for each matcher as the values. You can pick from the classes that are already included with Searchy or you can create your own.
 
 ### Matchers
 
-To create your own matchers, you can create your own class that extends `TomLingham\Searchy\Matchers\BaseMatcher` and (for simple Matchers) override the `formatQuery` method to return a string formatted with `%` wildcards in required locations. For more advanced extensions you may need to override the `buildQuery` method and others as well.
+To create your own matchers, you can create your own class that extends `InvisionMedia\Searchy\Matchers\BaseMatcher` and (for simple Matchers) override the `formatQuery` method to return a string formatted with `%` wildcards in required locations. For more advanced extensions you may need to override the `buildQuery` method and others as well.
 
 ## Contributing & Reporting Bugs
 

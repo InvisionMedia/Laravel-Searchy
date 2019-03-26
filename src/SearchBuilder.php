@@ -1,9 +1,9 @@
 <?php
 
-namespace TomLingham\Searchy;
+namespace InvisionMedia\Searchy;
 
 use Illuminate\Config\Repository;
-use TomLingham\Searchy\SearchDrivers\FuzzySearchDriver;
+use InvisionMedia\Searchy\SearchDrivers\FuzzySearchDriver;
 
 /**
  * @property mixed driverName

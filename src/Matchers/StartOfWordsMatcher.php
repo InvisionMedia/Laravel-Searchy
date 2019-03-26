@@ -1,6 +1,6 @@
 <?php
 
-namespace TomLingham\Searchy\Matchers;
+namespace InvisionMedia\Searchy\Matchers;
 
 /**
  * Matches the start of each word against each word in a search.

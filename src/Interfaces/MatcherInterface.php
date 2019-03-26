@@ -1,6 +1,6 @@
 <?php
 
-namespace TomLingham\Searchy\Interfaces;
+namespace InvisionMedia\Searchy\Interfaces;
 
 interface MatcherInterface
 {

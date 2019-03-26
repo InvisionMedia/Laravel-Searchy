@@ -1,8 +1,8 @@
 <?php
 
-namespace TomLingham\Searchy\Matchers;
+namespace InvisionMedia\Searchy\Matchers;
 
-use TomLingham\Searchy\Interfaces\MatcherInterface;
+use InvisionMedia\Searchy\Interfaces\MatcherInterface;
 
 /**
  * @property mixed multiplier
