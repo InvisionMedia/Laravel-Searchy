@@ -1,6 +1,6 @@
 {
     "name": "invision-media/searchy",
-    "description": "Laravel Searchy makes user driven searching easy with fuzzy search, basic string matching, Levenshtein Distance and more.",
+    "description": "Laravel Searchy makes user driven searching easy with fuzzy search, basic string matching, Levenshtein Distance and more. This fork makes it possible to change your database connection.",
     "keywords": ["laravel","search","fuzzy"],
     "license": "MIT",
     "authors": [
