@@ -7,6 +7,8 @@ use InvisionMedia\Searchy\Interfaces\SearchDriverInterface;
 
 abstract class BaseSearchDriver implements SearchDriverInterface
 {
+    protected $connection;
+
     protected $table;
 
     protected $columns;
@@ -29,8 +31,9 @@ abstract class BaseSearchDriver implements SearchDriverInterface
      *
      * @internal param $relevanceField
      */
-    public function __construct($table = null, $searchFields = [], $relevanceFieldName, $columns = ['*'])
+    public function __construct($connection = null, $table = null, $searchFields = [], $relevanceFieldName, $columns = ['*'])
     {
+    	$this->connection = $connection;
         $this->searchFields = $searchFields;
         $this->table = $table;
         $this->columns = $columns;
@@ -72,7 +75,7 @@ abstract class BaseSearchDriver implements SearchDriverInterface
      */
     public function query($searchString)
     {
-        $this->searchString = substr(\DB::connection()->getPdo()->quote($searchString), 1, -1);
+        $this->searchString = substr(\DB::connection($this->connection)->getPdo()->quote($searchString), 1, -1);
 
         return $this;
     }

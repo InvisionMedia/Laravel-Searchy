@@ -10,6 +10,11 @@ use InvisionMedia\Searchy\SearchDrivers\FuzzySearchDriver;
  */
 class SearchBuilder
 {
+	/**
+	 * @var
+	 */
+	private $connection;
+
     /**
      * @var
      */
@@ -75,6 +80,18 @@ class SearchBuilder
     }
 
     /**
+     * @param $connectionName
+     *
+     * @return $this
+     */
+    public function connection($connectionName = null)
+    {
+        $this->connection = $connectionName;
+
+        return $this;
+    }
+
+    /**
      * @param $table
      * @param $searchFields
      *
@@ -101,10 +118,13 @@ class SearchBuilder
 
         // Create a new instance of the selected drivers 'class' and pass
         // through table and fields to search
-        $driverInstance = new $driver( $this->table,
-                                       $this->searchFields,
-                                       $relevanceFieldName,
-                                       ['*']);
+        $driverInstance = new $driver(
+        	$this->connection,
+        	$this->table,
+            $this->searchFields,
+            $relevanceFieldName,
+            ['*']
+        );
 
         return $driverInstance;
     }
